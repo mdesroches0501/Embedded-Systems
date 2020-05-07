@@ -1,0 +1,236 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
+
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+%\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Homework\ \#10}
+\newcommand{\hmwkDueDate}{April 19, 2019}
+\newcommand{\hmwkClass}{CPE 301}
+\newcommand{\hmwkClassTime}{Section 101}
+\newcommand{\hmwkClassInstructor}{Dr. Dwight Egbert}
+\newcommand{\hmwkAuthorName}{\textbf{Michael DesRoches}}
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 9:00am}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+    \vspace{3in}
+}
+
+\author{\hmwkAuthorName}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+
+\begin{document}
+\maketitle
+\pagebreak
+
+\begin{homeworkProblem}
+
+\begin{lstlisting}
+Description of Purpose:
+Homework 10 has us working with VERILOG and VHDL. After loooking at some
+programming tutorials, we are to evaluate which one is more usefull. Also, we
+are to look at the brief history of both to further understand the concepts of
+both.
+
+What is the purpose of an interrupt?
+\end{lstlisting}
+
+  \textbf{Solution}
+  \\Interrupt is defined as it's a signal which is generated from devices joined to \\
+  a pc or from a program inside the PC that requires the working framework to \\
+  interrupt it and make sense of what to do next.\\
+
+\end{homeworkProblem}
+%\pagebreak
+
+\begin{homeworkProblem}
+
+\begin{lstlisting}
+Describe the flow of events when an interrupt occurs.
+\end{lstlisting}
+
+  \textbf{Solution}
+
+
+\end{homeworkProblem}
+\pagebreak
+
+
+\begin{homeworkProblem}
+\begin{lstlisting}
+Describe the interrupt features available with the Atmega328P.
+\end{lstlisting}
+
+  \textbf{Solution}
+
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+
+\begin{lstlisting}
+What is interrupt priority? How is it determined?
+\end{lstlisting}
+
+  \textbf{Solution}
+
+\end{homeworkProblem}
+\pagebreak
+
+begin{homeworkProblem}
+
+\begin{lstlisting}
+What steps are required by the system designer to properly configure an
+interrupt?
+\end{lstlisting}
+
+  \textbf{Solution}
+
+\end{homeworkProblem}
+\pagebreak
+
+begin{homeworkProblem}
+
+\begin{lstlisting}
+How is the interrupt system turned "on" and "off"?
+\end{lstlisting}
+
+  \textbf{Solution}
+
+\end{homeworkProblem}
+\pagebreak
+
+begin{homeworkProblem}
+
+\begin{lstlisting}
+Write a program to set up timer1 using NORMAL mode so that it generates an
+interrupt in exactly 1/8 of a second. Write an interrupt service routine (ISR),
+triggered by the timer interrupt TOV1 that stops, resets, and restarts the
+timer and toggles the Arduino Mega LED each time it is called. This will
+produce a light that blinks 4 times/sec.
+\end{lstlisting}
+
+  \textbf{Solution}
+
+\end{homeworkProblem}
+\pagebreak
+
+\begin{homeworkProblem}
+
+\begin{lstlisting}
+Write a program to set up timer1 using NORMAL mode so that it generates an
+interrupt in exactly 1/8 of a second. Write an interrupt service routine
+(ISR), triggered by the timer interrupt TOV1 that stops, resets, and restarts
+the timer and toggles the Arduino Mega LED each time it is called. This will
+produce a light that blinks 4 times/sec.
+\end{lstlisting}
+
+  \textbf{Solution}
+Interrupt is defined as it's a signal which is generated from devices joined to \\
+a pc or from a program inside the PC that requires the working framework to \\
+interrupt it and make sense of what to do next.
+\end{homeworkProblem}
+\pagebreak
+\end{lstlisting}
+
+  \textbf{Solution}
+
+\end{homeworkProblem}
+\pagebreak
+
+\end{document}

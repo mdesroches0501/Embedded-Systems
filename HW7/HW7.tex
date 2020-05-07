@@ -1,0 +1,174 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
+
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+%\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Homework\ \#7}
+\newcommand{\hmwkDueDate}{April 05, 2019}
+\newcommand{\hmwkClass}{CPE 301}
+\newcommand{\hmwkClassTime}{Section 101}
+\newcommand{\hmwkClassInstructor}{Dr. Dwight Egbert}
+\newcommand{\hmwkAuthorName}{\textbf{Michael DesRoches}}
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 9:00am}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+    \vspace{3in}
+}
+
+\author{\hmwkAuthorName}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+
+\begin{document}
+\maketitle
+\pagebreak
+
+%\begin{homeworkProblem}
+
+\begin{lstlisting}
+
+Description of Purpose:
+This homework gets us familiar with analog-to-digital converters. It's a way to
+bridge the gap in the analog environment. Potentiometers, Thermistors,
+accelerometers, and ambient light sensors are a few examples of those devices.
+We will set the analog inputs as neccessary using the arduino registers to
+further comprehend this ordeal.
+
+
+int16_t adc_read(uint8_t mux)
+{
+    uint8_t low;
+
+    ADCSRA = (1<<ADEN) | ADC_PRESCALER;             // enable ADC
+    ADCSRB = (1<<ADHSM) | (mux & 0x20);             // high speed mode
+    ADMUX = aref | (mux & 0x1F);                    // configure mux input
+    ADCSRA = (1<<ADEN) | ADC_PRESCALER | (1<<ADSC); // start the conversion
+    while (ADCSRA & (1<<ADSC)) ;                    // wait for result
+    low = ADCL;                                     // must read LSB first
+    return (ADCH << 8) | low;                       // must read MSB only once!
+}
+void adc_start(uint8_t mux, uint8_t aref)
+{
+    ADCSRA = (1<<ADEN) | ADC_PRESCALER;     // enable the ADC, interrupt disabled
+    ADCSRB = (1<<ADHSM) | (mux & 0x20);
+    ADMUX = aref | (mux & 0x1F);            // configure mux and ref
+    head = 0;                               // clear the buffer
+    tail = 0;                               // and then begin auto trigger mode
+    ADCSRA = (1<<ADSC) | (1<<ADEN) | (1<<ADATE) | (1<<ADIE) | ADC_PRESCALER;
+    sei();
+}
+int16_t adc_read(void)
+{
+    uint8_t h, t;
+    int16_t val;
+
+    do {
+        h = head;
+        t = tail;                   // wait for data in buffer
+    } while (h == t);
+    if (++t >= BUFSIZE) t = 0;
+    val = buffer[t];                // remove 1 sample from buffer
+    tail = t;
+    return val;
+}
+
+
+\end{lstlisting}
+
+  \textbf{Solution}
+%\end(homeworkProblem)
+\end{document}

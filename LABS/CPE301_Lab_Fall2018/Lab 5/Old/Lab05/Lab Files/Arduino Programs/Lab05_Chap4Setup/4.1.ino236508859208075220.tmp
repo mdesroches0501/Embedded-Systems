@@ -1,0 +1,14 @@
+# define DEBUG_OUTPUT_MESSAGE_MAX_LENGTH 80
+void setup ()
+{
+//char message [ DEBUG_OUTPUT_MESSAGE_MAX_LENGTH ];
+//snprintf ( message , DEBUG_OUTPUT_MESSAGE_MAX_LENGTH , "Hello ,World !\n");
+
+//Serial.write(message);
+}
+char message [ DEBUG_OUTPUT_MESSAGE_MAX_LENGTH ];
+snprintf ( message , DEBUG_OUTPUT_MESSAGE_MAX_LENGTH , "Hello ,World !\n");
+
+Serial.write(message);{Serial.write(message);
+delay(1000);
+}
